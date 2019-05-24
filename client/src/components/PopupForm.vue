@@ -88,7 +88,7 @@ export default {
       let formData = new FormData();
       formData.append("image", this.imageFile);
       Axios({
-        url: "http://localhost:3000/upload",
+        url: "http://mongodb+srv://admin:admin@cluster0-d43ve.gcp.mongodb.net/miniWP?retryWrites=true/upload",
         method: "POST",
         data: formData
       })
@@ -110,7 +110,7 @@ export default {
     },
     submit() {
       Axios({
-        url: "http://localhost:3000/articles",
+        url: "http://mongodb+srv://admin:admin@cluster0-d43ve.gcp.mongodb.net/miniWP?retryWrites=true/articles",
         method: "POST",
         data: {
           title: this.title,
@@ -126,6 +126,7 @@ export default {
           this.editorData = "";
           this.title = "";
           this.coverImg = "";
+          this.dialog = false
           this.$emit("updated");
           Swal.fire({
             position: "top-end",
@@ -170,7 +171,7 @@ export default {
       let formData = new FormData();
       formData.append("image", file);
       Axios({
-        url: "http://localhost:3000/upload",
+        url: "http://mongodb+srv://admin:admin@cluster0-d43ve.gcp.mongodb.net/miniWP?retryWrites=true/upload",
         method: "POST",
         data: formData
       })

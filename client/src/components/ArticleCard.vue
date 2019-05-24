@@ -78,7 +78,7 @@ export default {
       }).then(result => {
         if (result.value) {
           Axios({
-            url: "http://localhost:3000/articles/" + id,
+            url: "http://mongodb+srv://admin:admin@cluster0-d43ve.gcp.mongodb.net/miniWP?retryWrites=true/articles/" + id,
             method: "DELETE",
             headers: {
               token: localStorage.getItem("token")

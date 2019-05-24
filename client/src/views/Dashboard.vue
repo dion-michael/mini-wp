@@ -60,7 +60,8 @@ export default {
     },
     getData() {
       axios({
-        url: "http://localhost:3000/articles",
+        url:
+          "http://mongodb+srv://admin:admin@cluster0-d43ve.gcp.mongodb.net/miniWP?retryWrites=true/articles",
         method: "GET",
         headers: {
           token: localStorage.getItem("token")

@@ -36,7 +36,9 @@ export default {
   created() {
     console.log(this.articleId);
     axios({
-      url: "http://localhost:3000/articles/" + this.articleId,
+      url:
+        "http://mongodb+srv://admin:admin@cluster0-d43ve.gcp.mongodb.net/miniWP?retryWrites=true/articles/" +
+        this.articleId,
       method: "GET",
       headers: {
         token: localStorage.getItem("token")

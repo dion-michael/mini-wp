@@ -7,7 +7,16 @@
             <v-toolbar-title>Login Form</v-toolbar-title>
           </v-toolbar>
           <v-card-text>
-            <v-form ref="form" v-model="valid" lazy-validation>
+            <v-form ref="form" v-model="valid" lazy-validation @submit.prevent="submit">
+              <v-text-field
+                v-if="register"
+                prepend-icon="person"
+                name="name"
+                label="Name"
+                type="text"
+                v-model="name"
+                required
+              ></v-text-field>
               <v-text-field
                 prepend-icon="person"
                 name="email"
@@ -27,12 +36,18 @@
                 v-model="password"
                 :rules="passwordRules"
               ></v-text-field>
+              <v-card-actions>
+                <a
+                  v-if="!register"
+                  class="caption accent--text ml-3"
+                  @click="register=true"
+                >register</a>
+                <a v-if="register" class="caption accent--text ml-3" @click="register=false">signin</a>
+                <v-spacer></v-spacer>
+                <v-btn color="primary" :disabled="!valid" type="submit">Login</v-btn>
+              </v-card-actions>
             </v-form>
           </v-card-text>
-          <v-card-actions>
-            <v-spacer></v-spacer>
-            <v-btn color="primary" :disabled="!valid" @click="submit">Login</v-btn>
-          </v-card-actions>
         </v-card>
       </v-flex>
     </v-layout>
@@ -44,7 +59,9 @@ import axios from "axios";
 export default {
   data() {
     return {
+      register: false,
       valid: false,
+      name: "",
       email: "",
       password: "",
       emailRules: [
@@ -60,8 +77,33 @@ export default {
   methods: {
     submit() {
       console.log("line 62");
+      if (this.register) {
+        this.registerUser();
+      } else {
+        this.login();
+      }
+    },
+    registerUser() {
       axios({
-        url: "http://localhost:3000/signin",
+        url: "http://mongodb+srv://admin:admin@cluster0-d43ve.gcp.mongodb.net/miniWP?retryWrites=true/register",
+        method: "POST",
+        data: {
+          email: this.email,
+          password: this.password,
+          name: this.name
+        }
+      })
+        .then(user => {
+          console.log(user);
+          this.login();
+        })
+        .catch(err => {
+          console.log(err);
+        });
+    },
+    login() {
+      axios({
+        url: "http://mongodb+srv://admin:admin@cluster0-d43ve.gcp.mongodb.net/miniWP?retryWrites=true/signin",
         method: "POST",
         data: {
           email: this.email,

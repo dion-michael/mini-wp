@@ -63,7 +63,7 @@ export default {
   },
   mounted() {
     axios({
-      url: "http://localhost:3000/articles/all",
+      url: "http://mongodb+srv://admin:admin@cluster0-d43ve.gcp.mongodb.net/miniWP?retryWrites=true/articles/all",
       method: "GET",
       headers: {
         token: localStorage.getItem("token")
